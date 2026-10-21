@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFile,access} from 'node:fs/promises';
+const root=new URL('../',import.meta.url);
+const manifest=JSON.parse(await readFile(new URL('plugin.json',root),'utf8'));
+const mcp=JSON.parse(await readFile(new URL('mcp.json',root),'utf8'));
+const ui=manifest.extensions['com.openai'].interface;
+assert.equal(manifest.name,'netiker');
+assert.match(manifest.version,/^\d+\.\d+\.\d+$/);
+assert.ok(ui.shortDescription.length<=30);
+assert.ok(ui.longDescription.length>0&&ui.longDescription.length<=4000);
+assert.equal(mcp.mcpServers.netiker.url,'https://app.netiker.com/mcp');
+assert.equal(mcp.mcpServers.netiker.extensions['com.openai'].auth.client.mode,'dcr');
+assert.deepEqual(mcp.mcpServers.netiker.extensions['com.openai'].auth.baseScopes,['reports:read','runs:read']);
+await access(new URL(ui.logo,root));
+const skill=await readFile(new URL('skills/netiker/SKILL.md',root),'utf8');
+assert.match(skill,/name: netiker/);
+assert.match(skill,/list_reports/);
+console.log(`Netiker ${manifest.version}: manifest, OAuth configuration, logo and skill validated.`);

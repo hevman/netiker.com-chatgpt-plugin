@@ -1,0 +1,27 @@
+name: Validate and package Netiker plugin
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/validate.mjs
+      - name: Build plugin ZIP with manifests at archive root
+        run: |
+          mkdir -p dist
+          version=$(node -p "JSON.parse(require('fs').readFileSync('plugin.json','utf8')).version")
+          zip -r "dist/netiker-plugin-${version}.zip" plugin.json mcp.json README.md assets skills
+      - uses: actions/upload-artifact@v4
+        with:
+          name: netiker-chatgpt-plugin
+          path: dist/*.zip

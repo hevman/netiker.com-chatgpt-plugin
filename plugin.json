@@ -1,0 +1,44 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "netiker",
+  "version": "0.1.2",
+  "description": "Read and analyze your saved marketing and SEO reports from Netiker, including Google Search Console, Bing and Ahrefs.",
+  "author": {
+    "name": "Netiker",
+    "url": "https://netiker.com"
+  },
+  "homepage": "https://netiker.com/chatgpt",
+  "keywords": [
+    "seo",
+    "analytics",
+    "gsc",
+    "bing",
+    "marketing"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Netiker",
+        "shortDescription": "Marketing and SEO reports",
+        "developerName": "Netiker",
+        "category": "Business & Operations",
+        "capabilities": [
+          "Read"
+        ],
+        "websiteURL": "https://netiker.com",
+        "privacyPolicyURL": "https://netiker.com/privacy",
+        "termsOfServiceURL": "https://netiker.com/terms",
+        "brandColor": "#7055e8",
+        "defaultPrompt": [
+          "List my Google Search Console and Bing reports.",
+          "Compare my saved reports, checking periods and data completeness first."
+        ],
+        "longDescription": "Analyze saved marketing and SEO reports from your Netiker account, including Google Search Console, Bing Webmaster Tools, Ahrefs and other connected sources. Discover reports, inspect fields and reporting periods, read paginated data and check synchronization history. The plugin includes guidance for correct aggregation, source distinctions and incomplete data. Read-only access requires signing into Netiker and approving OAuth scopes. It does not expose provider credentials, refresh sources or modify data. Netiker account limits apply.",
+        "supportURL": "https://netiker.com/contact",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      }
+    }
+  },
+  "repository": "https://github.com/hevman/netiker.com-chatgpt-plugin"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "netiker": {
+      "type": "streamable-http",
+      "url": "https://app.netiker.com/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": { "mode": "dcr" },
+            "baseScopes": ["reports:read", "runs:read"],
+            "resource": "https://app.netiker.com/mcp"
+          }
+        }
+      }
+    }
+  }
+}
